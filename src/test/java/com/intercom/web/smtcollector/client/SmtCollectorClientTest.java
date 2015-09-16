@@ -39,8 +39,8 @@ public class SmtCollectorClientTest {
 
 	private SmtCollectorClient client;
 	private static final String URL = "http://smtcollector.interlaced.it/api";
-	private static final String USERNAME = "SMT-USERNAME";
-	private static final String PASSWORD = "SMT-PASSWORD";
+	private static final String USERNAME = "USERNAME";
+	private static final String PASSWORD = "PASSWORD";
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public SmtCollectorClientTest() {
