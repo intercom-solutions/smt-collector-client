@@ -10,15 +10,15 @@ public abstract class SmtImageAsset extends SmtAsset {
 
 	public enum Source implements SmtValueObject<Source> {
 
-		ELVIS {
+		BRANDBANK {
 			@Override
-			public boolean isElvis() {
+			public boolean isBrandbank() {
 				return true;
 			}
 
-		}, BRANDBANK {
+		}, ELVIS {
 			@Override
-			public boolean isBrandBank() {
+			public boolean isElvis() {
 				return true;
 			}
 
@@ -30,11 +30,11 @@ public abstract class SmtImageAsset extends SmtAsset {
 
 		};
 
-		public boolean isElvis() {
+		public boolean isBrandbank() {
 			return false;
 		}
 
-		public boolean isBrandBank() {
+		public boolean isElvis() {
 			return false;
 		}
 

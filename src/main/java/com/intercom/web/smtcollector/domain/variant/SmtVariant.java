@@ -1,5 +1,6 @@
 package com.intercom.web.smtcollector.domain.variant;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -1944,6 +1945,14 @@ public class SmtVariant extends SmtAuditableEntity<SmtVariant> {
 		return null;
 	}
 
+	@JsonIgnore
+	public SmtVariantGenericImageAsset getPrimaryGenericImageAsset() {
+		if(!genericImageAssets.isEmpty()) {
+			return genericImageAssets.get(0);
+		}
+		return null;
+	}
+
 	public void setGenericImageAssets(List<SmtVariantGenericImageAsset> genericImageAssets) {
 		this.genericImageAssets = genericImageAssets;
 	}
@@ -1961,6 +1970,14 @@ public class SmtVariant extends SmtAuditableEntity<SmtVariant> {
 					return asset;
 				}
 			}
+		}
+		return null;
+	}
+
+	@JsonIgnore
+	public SmtVariantThirdPartyLogoImageAsset getPrimaryThirdPartyLogoImageAsset() {
+		if(!thirdPartyLogoImageAssets.isEmpty()) {
+			return thirdPartyLogoImageAssets.get(0);
 		}
 		return null;
 	}

@@ -20,13 +20,10 @@ import com.intercom.web.smtcollector.domain.variant.SmtVariant;
 import com.intercom.web.smtcollector.domain.variant.SmtVariantFilter;
 import com.intercom.web.smtcollector.domain.variant.SmtVariantGtin;
 import com.intercom.web.smtcollector.domain.variant.longtext.SmtVariantLongTextIngredient;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.commons.lang3.time.DateUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -39,8 +36,8 @@ public class SmtCollectorClientTest {
 
 	private SmtCollectorClient client;
 	private static final String URL = "http://smtcollector.interlaced.it/api";
-	private static final String USERNAME = "SMT-USERNAME";
-	private static final String PASSWORD = "SMT-PASSWORD";
+	private static final String USERNAME = "USERNAME";
+	private static final String PASSWORD = "PASSWORD";
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public SmtCollectorClientTest() {
@@ -121,9 +118,9 @@ public class SmtCollectorClientTest {
 		SmtPageable pageable = new SmtPageable();
 		SmtVariantFilter filter = new SmtVariantFilter();
 		Set<SmtVariantGtin> gtins = new LinkedHashSet<SmtVariantGtin>();
-		gtins.add(SmtVariantGtin.valueOf("0000000000110"));
+		gtins.add(SmtVariantGtin.valueOf("0000080242796"));
 		filter.setGtins(gtins);
-		filter.setLastModifiedDateGreaterThanOrEqualTo(DateUtils.addDays(DateUtils.truncate(new Date(), Calendar.DATE), -7));
+		//filter.setLastModifiedDateGreaterThanOrEqualTo(DateUtils.addDays(DateUtils.truncate(new Date(), Calendar.DATE), -7));
 		SmtVariantsPagedResponse variantsPagedResponse = client.getVariants(pageable, filter);
 		for(Map.Entry<String, SmtLink> linkEntry : variantsPagedResponse.getLinks().entrySet()) {
 			String key = linkEntry.getKey();
@@ -140,6 +137,9 @@ public class SmtCollectorClientTest {
 			}
 			List<SmtVariantGenericImageAsset> genericImageAssets = variant.getGenericImageAssets();
 			logger.info("Total generic image assets: " + genericImageAssets.size());
+			if(!genericImageAssets.isEmpty()) {
+				logger.info("Primary generic image asset custom URL: " + variant.getPrimaryGenericImageAsset().getPreviewUrl(100, 100));
+			}
 			for(SmtVariantGenericImageAsset genericImageAsset : genericImageAssets) {
 				logger.info("Generic image asset custom URL: " + genericImageAsset.getPreviewUrl(100, 100));
 			}
