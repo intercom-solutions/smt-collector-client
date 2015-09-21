@@ -15,6 +15,7 @@ import com.intercom.web.smtcollector.domain.brandtype.SmtBrandTypeCode;
 import com.intercom.web.smtcollector.domain.brandtype.SmtBrandTypeFilter;
 import com.intercom.web.smtcollector.domain.group.SmtGroupCode;
 import com.intercom.web.smtcollector.domain.group.SmtGroupFilter;
+import com.intercom.web.smtcollector.domain.product.SmtProductCode;
 import com.intercom.web.smtcollector.domain.variant.SmtVariantFilter;
 import com.intercom.web.smtcollector.domain.variant.SmtVariantGtin;
 import java.io.ByteArrayInputStream;
@@ -166,6 +167,14 @@ public class SmtCollectorClient {
 			}
 			if(filter.getLastModifiedDateGreaterThanOrEqualTo() != null) {
 				parameters.add("lastModifiedDateGreaterThanOrEqualTo", DateFormatUtils.format(filter.getLastModifiedDateGreaterThanOrEqualTo(), DATE_FORMAT));
+			}
+			if(filter.getProductCode() != null) {
+				parameters.add("productCode", filter.getProductCode());
+			}
+			if(filter.getProductCodes() != null) {
+				for(SmtProductCode productCode : filter.getProductCodes()) {
+					parameters.add("productCodes", productCode.toString());
+				}
 			}
 			if(filter.getProductCodeLike() != null) {
 				parameters.add("productCodeLike", filter.getProductCodeLike());

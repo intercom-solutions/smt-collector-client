@@ -4,6 +4,7 @@ import com.intercom.web.smtcollector.domain.SmtFilter;
 import com.intercom.web.smtcollector.domain.brand.SmtBrandCode;
 import com.intercom.web.smtcollector.domain.brandtype.SmtBrandTypeCode;
 import com.intercom.web.smtcollector.domain.group.SmtGroupCode;
+import com.intercom.web.smtcollector.domain.product.SmtProductCode;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -14,6 +15,8 @@ public class SmtVariantFilter implements SmtFilter<SmtVariant> {
 	private Set<SmtVariantGtin> gtins = new LinkedHashSet<SmtVariantGtin>();
 	private String gtinLike = null;
 	private Date lastModifiedDateGreaterThanOrEqualTo = null;
+	private SmtProductCode productCode = null;
+	private Set<SmtProductCode> productCodes = new LinkedHashSet<SmtProductCode>();
 	private String productCodeLike = null;
 	private String productTechnicalDescriptionLike = null;
 	private String productCompactDescriptionLike = null;
@@ -64,6 +67,22 @@ public class SmtVariantFilter implements SmtFilter<SmtVariant> {
 
 	public void setLastModifiedDateGreaterThanOrEqualTo(Date lastModifiedDateGreaterThanOrEqualTo) {
 		this.lastModifiedDateGreaterThanOrEqualTo = lastModifiedDateGreaterThanOrEqualTo;
+	}
+
+	public SmtProductCode getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(SmtProductCode productCode) {
+		this.productCode = productCode;
+	}
+
+	public Set<SmtProductCode> getProductCodes() {
+		return productCodes;
+	}
+
+	public void setProductCodes(Set<SmtProductCode> productCodes) {
+		this.productCodes = productCodes;
 	}
 
 	public String getProductCodeLike() {

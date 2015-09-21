@@ -2,6 +2,7 @@ package com.intercom.web.smtcollector.client.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.Validate;
 
 public class SmtPage {
 
@@ -54,6 +55,18 @@ public class SmtPage {
 	@JsonIgnore
 	public boolean hasNext() {
 		return (number < (totalPages - 1));
+	}
+
+	@JsonIgnore
+	public int getPrevious() {
+		Validate.validState(hasPrevious(), "No previous page");
+		return (number - 1);
+	}
+
+	@JsonIgnore
+	public int getNext() {
+		Validate.validState(hasNext(), "No next page");
+		return (number + 1);
 	}
 
 	@JsonIgnore
