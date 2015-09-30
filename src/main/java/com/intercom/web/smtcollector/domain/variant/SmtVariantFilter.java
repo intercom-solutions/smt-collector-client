@@ -13,15 +13,21 @@ public class SmtVariantFilter implements SmtFilter<SmtVariant> {
 
 	private SmtVariantGtin gtin = null;
 	private Set<SmtVariantGtin> gtins = new LinkedHashSet<SmtVariantGtin>();
-	private String gtinLike = null;
-	private Date lastModifiedDateGreaterThanOrEqualTo = null;
+	private Set<SmtVariantGtinPrefix> gtinPrefixes = new LinkedHashSet<SmtVariantGtinPrefix>();
+	private String gtinStartsWith = null;
+	private String gtinContains = null;
 	private SmtProductCode productCode = null;
 	private Set<SmtProductCode> productCodes = new LinkedHashSet<SmtProductCode>();
-	private String productCodeLike = null;
-	private String productTechnicalDescriptionLike = null;
-	private String productCompactDescriptionLike = null;
+	private String productCodeStartsWith = null;
+	private String productCodeContains = null;
+	private String productTechnicalDescriptionStartsWith = null;
+	private String productTechnicalDescriptionContains = null;
+	private String productCompactDescriptionStartsWith = null;
+	private String productCompactDescriptionContains = null;
 	private Boolean productClickAndCollect = null;
-	private String descriptionLike = null;
+	private Boolean web = null;
+	private String descriptionStartsWith = null;
+	private String descriptionContains = null;
 	private Set<SmtGroupCode> subfamilyGroupCodes = new LinkedHashSet<SmtGroupCode>();
 	private Set<SmtGroupCode> familyGroupCodes = new LinkedHashSet<SmtGroupCode>();
 	private Set<SmtGroupCode> groupGroupCodes = new LinkedHashSet<SmtGroupCode>();
@@ -29,12 +35,11 @@ public class SmtVariantFilter implements SmtFilter<SmtVariant> {
 	private Set<SmtGroupCode> departmentGroupCodes = new LinkedHashSet<SmtGroupCode>();
 	private Set<SmtBrandTypeCode> brandTypeCodes = new LinkedHashSet<SmtBrandTypeCode>();
 	private Set<SmtBrandCode> brandCodes = new LinkedHashSet<SmtBrandCode>();
-	private String longTextBrandLike = null;
 	private String longTextBrandStartsWith = null;
+	private String longTextBrandContains = null;
+	private Date lastModifiedDateGreaterThanOrEqualTo = null;
 
 	public SmtVariantFilter() {
-		this.gtinLike = null;
-		this.productCodeLike = null;
 	}
 
 	public SmtVariantGtin getGtin() {
@@ -53,20 +58,28 @@ public class SmtVariantFilter implements SmtFilter<SmtVariant> {
 		this.gtins = gtins;
 	}
 
-	public String getGtinLike() {
-		return gtinLike;
+	public Set<SmtVariantGtinPrefix> getGtinPrefixes() {
+		return gtinPrefixes;
 	}
 
-	public void setGtinLike(String gtinLike) {
-		this.gtinLike = gtinLike;
+	public void setGtinPrefixes(Set<SmtVariantGtinPrefix> gtinPrefixes) {
+		this.gtinPrefixes = gtinPrefixes;
 	}
 
-	public Date getLastModifiedDateGreaterThanOrEqualTo() {
-		return lastModifiedDateGreaterThanOrEqualTo;
+	public String getGtinStartsWith() {
+		return gtinStartsWith;
 	}
 
-	public void setLastModifiedDateGreaterThanOrEqualTo(Date lastModifiedDateGreaterThanOrEqualTo) {
-		this.lastModifiedDateGreaterThanOrEqualTo = lastModifiedDateGreaterThanOrEqualTo;
+	public void setGtinStartsWith(String gtinStartsWith) {
+		this.gtinStartsWith = gtinStartsWith;
+	}
+
+	public String getGtinContains() {
+		return gtinContains;
+	}
+
+	public void setGtinContains(String gtinContains) {
+		this.gtinContains = gtinContains;
 	}
 
 	public SmtProductCode getProductCode() {
@@ -85,28 +98,52 @@ public class SmtVariantFilter implements SmtFilter<SmtVariant> {
 		this.productCodes = productCodes;
 	}
 
-	public String getProductCodeLike() {
-		return productCodeLike;
+	public String getProductCodeStartsWith() {
+		return productCodeStartsWith;
 	}
 
-	public void setProductCodeLike(String productCodeLike) {
-		this.productCodeLike = productCodeLike;
+	public void setProductCodeStartsWith(String productCodeStartsWith) {
+		this.productCodeStartsWith = productCodeStartsWith;
 	}
 
-	public String getProductTechnicalDescriptionLike() {
-		return productTechnicalDescriptionLike;
+	public String getProductCodeContains() {
+		return productCodeContains;
 	}
 
-	public void setProductTechnicalDescriptionLike(String productTechnicalDescriptionLike) {
-		this.productTechnicalDescriptionLike = productTechnicalDescriptionLike;
+	public void setProductCodeContains(String productCodeContains) {
+		this.productCodeContains = productCodeContains;
 	}
 
-	public String getProductCompactDescriptionLike() {
-		return productCompactDescriptionLike;
+	public String getProductTechnicalDescriptionStartsWith() {
+		return productTechnicalDescriptionStartsWith;
 	}
 
-	public void setProductCompactDescriptionLike(String productCompactDescriptionLike) {
-		this.productCompactDescriptionLike = productCompactDescriptionLike;
+	public void setProductTechnicalDescriptionStartsWith(String productTechnicalDescriptionStartsWith) {
+		this.productTechnicalDescriptionStartsWith = productTechnicalDescriptionStartsWith;
+	}
+
+	public String getProductTechnicalDescriptionContains() {
+		return productTechnicalDescriptionContains;
+	}
+
+	public void setProductTechnicalDescriptionContains(String productTechnicalDescriptionContains) {
+		this.productTechnicalDescriptionContains = productTechnicalDescriptionContains;
+	}
+
+	public String getProductCompactDescriptionStartsWith() {
+		return productCompactDescriptionStartsWith;
+	}
+
+	public void setProductCompactDescriptionStartsWith(String productCompactDescriptionStartsWith) {
+		this.productCompactDescriptionStartsWith = productCompactDescriptionStartsWith;
+	}
+
+	public String getProductCompactDescriptionContains() {
+		return productCompactDescriptionContains;
+	}
+
+	public void setProductCompactDescriptionContains(String productCompactDescriptionContains) {
+		this.productCompactDescriptionContains = productCompactDescriptionContains;
 	}
 
 	public Boolean getProductClickAndCollect() {
@@ -117,12 +154,28 @@ public class SmtVariantFilter implements SmtFilter<SmtVariant> {
 		this.productClickAndCollect = productClickAndCollect;
 	}
 
-	public String getDescriptionLike() {
-		return descriptionLike;
+	public Boolean getWeb() {
+		return web;
 	}
 
-	public void setDescriptionLike(String descriptionLike) {
-		this.descriptionLike = descriptionLike;
+	public void setWeb(Boolean web) {
+		this.web = web;
+	}
+
+	public String getDescriptionStartsWith() {
+		return descriptionStartsWith;
+	}
+
+	public void setDescriptionStartsWith(String descriptionStartsWith) {
+		this.descriptionStartsWith = descriptionStartsWith;
+	}
+
+	public String getDescriptionContains() {
+		return descriptionContains;
+	}
+
+	public void setDescriptionContains(String descriptionContains) {
+		this.descriptionContains = descriptionContains;
 	}
 
 	public Set<SmtGroupCode> getSubfamilyGroupCodes() {
@@ -181,20 +234,28 @@ public class SmtVariantFilter implements SmtFilter<SmtVariant> {
 		this.brandCodes = brandCodes;
 	}
 
-	public String getLongTextBrandLike() {
-		return longTextBrandLike;
-	}
-
-	public void setLongTextBrandLike(String longTextBrandLike) {
-		this.longTextBrandLike = longTextBrandLike;
-	}
-
 	public String getLongTextBrandStartsWith() {
 		return longTextBrandStartsWith;
 	}
 
 	public void setLongTextBrandStartsWith(String longTextBrandStartsWith) {
 		this.longTextBrandStartsWith = longTextBrandStartsWith;
+	}
+
+	public String getLongTextBrandContains() {
+		return longTextBrandContains;
+	}
+
+	public void setLongTextBrandContains(String longTextBrandContains) {
+		this.longTextBrandContains = longTextBrandContains;
+	}
+
+	public Date getLastModifiedDateGreaterThanOrEqualTo() {
+		return lastModifiedDateGreaterThanOrEqualTo;
+	}
+
+	public void setLastModifiedDateGreaterThanOrEqualTo(Date lastModifiedDateGreaterThanOrEqualTo) {
+		this.lastModifiedDateGreaterThanOrEqualTo = lastModifiedDateGreaterThanOrEqualTo;
 	}
 
 }

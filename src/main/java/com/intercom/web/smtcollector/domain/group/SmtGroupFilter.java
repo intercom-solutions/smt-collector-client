@@ -8,9 +8,9 @@ public class SmtGroupFilter implements SmtFilter<SmtGroup> {
 	private SmtGroupCode code = null;
 	private SmtGroupCode parentGroupCode = null;
 	private String codeStartsWith = null;
-	private String codeLike = null;
+	private String codeContains = null;
 	private String nameStartsWith = null;
-	private String nameLike = null;
+	private String nameContains = null;
 
 	public SmtGroupFilter() {
 	}
@@ -47,12 +47,12 @@ public class SmtGroupFilter implements SmtFilter<SmtGroup> {
 		this.codeStartsWith = codeStartsWith;
 	}
 
-	public String getCodeLike() {
-		return codeLike;
+	public String getCodeContains() {
+		return codeContains;
 	}
 
-	public void setCodeLike(String codeLike) {
-		this.codeLike = codeLike;
+	public void setCodeContains(String codeContains) {
+		this.codeContains = codeContains;
 	}
 
 	public String getNameStartsWith() {
@@ -63,12 +63,12 @@ public class SmtGroupFilter implements SmtFilter<SmtGroup> {
 		this.nameStartsWith = nameStartsWith;
 	}
 
-	public String getNameLike() {
-		return nameLike;
+	public String getNameContains() {
+		return nameContains;
 	}
 
-	public void setNameLike(String nameLike) {
-		this.nameLike = nameLike;
+	public void setNameContains(String nameContains) {
+		this.nameContains = nameContains;
 	}
 
 }

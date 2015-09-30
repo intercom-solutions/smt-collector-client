@@ -17,7 +17,6 @@ import org.apache.commons.validator.GenericValidator;
 public class SmtVariantGtinPrefix implements SmtEntityIdentifier<SmtVariantGtinPrefix>, Comparable<SmtVariantGtinPrefix> {
 
 	private String value;
-	public static final String VALUE_PATTERN = "^[0-9]+$";
 	public static final int VALUE_MIN_LENGTH = 1;
 	public static final int VALUE_MAX_LENGTH = 13;
 	public static final boolean CASE_SENSITIVE = false;
@@ -28,7 +27,7 @@ public class SmtVariantGtinPrefix implements SmtEntityIdentifier<SmtVariantGtinP
 
 	public SmtVariantGtinPrefix(String value) {
 		Validate.notNull(value, "The \"value\" parameter can not be null.");
-		Validate.matchesPattern(value, VALUE_PATTERN, "The \"value\" parameter must match the \"%s\" pattern.", VALUE_PATTERN);
+		Validate.matchesPattern(value, SmtVariantGtin.VALUE_PATTERN, "The \"value\" parameter must match the \"%s\" pattern.", SmtVariantGtin.VALUE_PATTERN);
 		Validate.inclusiveBetween(VALUE_MIN_LENGTH, VALUE_MAX_LENGTH, value.length(), "The \"value\" parameter must be between %d and %d characters in length.", VALUE_MIN_LENGTH, VALUE_MAX_LENGTH);
 		this.value = value;
 	}
@@ -38,7 +37,7 @@ public class SmtVariantGtinPrefix implements SmtEntityIdentifier<SmtVariantGtinP
 	}
 
 	public static boolean isValid(String value) {
-		return ((value != null) && GenericValidator.matchRegexp(value, VALUE_PATTERN) && GenericValidator.isInRange(value.length(), VALUE_MIN_LENGTH, VALUE_MAX_LENGTH));
+		return ((value != null) && GenericValidator.matchRegexp(value, SmtVariantGtin.VALUE_PATTERN) && GenericValidator.isInRange(value.length(), VALUE_MIN_LENGTH, VALUE_MAX_LENGTH));
 	}
 
 	@JsonProperty(value = "value")

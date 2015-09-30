@@ -6,7 +6,7 @@ import com.intercom.web.smtcollector.domain.SmtFilter;
 
 public class SmtUserFilter implements SmtFilter<SmtUser> {
 
-	private String nameLike = null;
+	private String nameContains = null;
 	private AccountStatus accountStatus = null;
 	private Boolean online = null;
 	private SmtCompanyCode companyCode = null;
@@ -14,16 +14,14 @@ public class SmtUserFilter implements SmtFilter<SmtUser> {
 	private String taxCode = null;
 
 	public SmtUserFilter() {
-		this.nameLike = null;
-		this.accountStatus = null;
 	}
 
-	public String getNameLike() {
-		return nameLike;
+	public String getNameContains() {
+		return nameContains;
 	}
 
-	public void setNameLike(String nameLike) {
-		this.nameLike = nameLike;
+	public void setNameContains(String nameContains) {
+		this.nameContains = nameContains;
 	}
 
 	public AccountStatus getAccountStatus() {

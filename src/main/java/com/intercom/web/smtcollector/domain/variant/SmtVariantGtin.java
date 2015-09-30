@@ -1,5 +1,6 @@
 package com.intercom.web.smtcollector.domain.variant;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -18,8 +19,8 @@ public class SmtVariantGtin implements SmtEntityIdentifier<SmtVariantGtin>, Comp
 
 	private String value;
 	public static final String VALUE_PATTERN = "^[0-9]+$";
-	public static final int VALUE_MIN_LENGTH = 13;
-	public static final int VALUE_MAX_LENGTH = 13;
+	public static final int EAN8_VALUE_LENGTH = 8;
+	public static final int EAN13_VALUE_LENGTH = 13;
 	public static final boolean CASE_SENSITIVE = false;
 
 	protected SmtVariantGtin() {
@@ -29,7 +30,7 @@ public class SmtVariantGtin implements SmtEntityIdentifier<SmtVariantGtin>, Comp
 	public SmtVariantGtin(String value) {
 		Validate.notNull(value, "The \"value\" parameter can not be null.");
 		Validate.matchesPattern(value, VALUE_PATTERN, "The \"value\" parameter must match the \"%s\" pattern.", VALUE_PATTERN);
-		Validate.inclusiveBetween(VALUE_MIN_LENGTH, VALUE_MAX_LENGTH, value.length(), "The \"value\" parameter must be between %d and %d characters in length.", VALUE_MIN_LENGTH, VALUE_MAX_LENGTH);
+		Validate.isTrue(((value.length() == EAN8_VALUE_LENGTH) || (value.length() == EAN13_VALUE_LENGTH)), "The \"value\" parameter must be %d or %d characters in length.", EAN8_VALUE_LENGTH, EAN13_VALUE_LENGTH);
 		this.value = value;
 	}
 
@@ -38,12 +39,22 @@ public class SmtVariantGtin implements SmtEntityIdentifier<SmtVariantGtin>, Comp
 	}
 
 	public static boolean isValid(String value) {
-		return ((value != null) && GenericValidator.matchRegexp(value, VALUE_PATTERN) && GenericValidator.isInRange(value.length(), VALUE_MIN_LENGTH, VALUE_MAX_LENGTH));
+		return ((value != null) && GenericValidator.matchRegexp(value, VALUE_PATTERN) && ((value.length() == EAN8_VALUE_LENGTH) || (value.length() == EAN13_VALUE_LENGTH)));
 	}
 
 	@JsonProperty(value = "value")
 	public String getValue() {
 		return value;
+	}
+
+	@JsonIgnore
+	public boolean isEan8() {
+		return (value.length() == EAN8_VALUE_LENGTH);
+	}
+
+	@JsonIgnore
+	public boolean isEan13() {
+		return (value.length() == EAN13_VALUE_LENGTH);
 	}
 
 	public boolean startsWith(Collection<SmtVariantGtinPrefix> gtinPrefixes) {

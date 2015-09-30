@@ -18,6 +18,7 @@ import com.intercom.web.smtcollector.domain.group.SmtGroupFilter;
 import com.intercom.web.smtcollector.domain.product.SmtProductCode;
 import com.intercom.web.smtcollector.domain.variant.SmtVariantFilter;
 import com.intercom.web.smtcollector.domain.variant.SmtVariantGtin;
+import com.intercom.web.smtcollector.domain.variant.SmtVariantGtinPrefix;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,14 +86,14 @@ public class SmtCollectorClient {
 			if(filter.getCodeStartsWith() != null) {
 				parameters.add("codeStartsWith", filter.getCodeStartsWith());
 			}
-			if(filter.getCodeLike() != null) {
-				parameters.add("codeLike", filter.getCodeLike());
+			if(filter.getCodeContains() != null) {
+				parameters.add("codeContains", filter.getCodeContains());
 			}
 			if(filter.getNameStartsWith() != null) {
 				parameters.add("nameStartsWith", filter.getNameStartsWith());
 			}
-			if(filter.getNameLike() != null) {
-				parameters.add("nameLike", filter.getNameLike());
+			if(filter.getNameContains() != null) {
+				parameters.add("nameContains", filter.getNameContains());
 			}
 		}
 		SmtGroupsPagedResponse response = doPost(GROUPS_PATH, SmtGroupsPagedResponse.class, parameters);
@@ -109,14 +110,14 @@ public class SmtCollectorClient {
 			if(filter.getCodeStartsWith() != null) {
 				parameters.add("codeStartsWith", filter.getCodeStartsWith());
 			}
-			if(filter.getCodeLike() != null) {
-				parameters.add("codeLike", filter.getCodeLike());
+			if(filter.getCodeContains() != null) {
+				parameters.add("codeContains", filter.getCodeContains());
 			}
 			if(filter.getNameStartsWith() != null) {
 				parameters.add("nameStartsWith", filter.getNameStartsWith());
 			}
-			if(filter.getNameLike() != null) {
-				parameters.add("nameLike", filter.getNameLike());
+			if(filter.getNameContains() != null) {
+				parameters.add("nameContains", filter.getNameContains());
 			}
 		}
 		SmtBrandTypesPagedResponse response = doPost(BRAND_TYPES_PATH, SmtBrandTypesPagedResponse.class, parameters);
@@ -136,14 +137,14 @@ public class SmtCollectorClient {
 			if(filter.getCodeStartsWith() != null) {
 				parameters.add("codeStartsWith", filter.getCodeStartsWith());
 			}
-			if(filter.getCodeLike() != null) {
-				parameters.add("codeLike", filter.getCodeLike());
+			if(filter.getCodeContains() != null) {
+				parameters.add("codeContains", filter.getCodeContains());
 			}
 			if(filter.getNameStartsWith() != null) {
 				parameters.add("nameStartsWith", filter.getNameStartsWith());
 			}
-			if(filter.getNameLike() != null) {
-				parameters.add("nameLike", filter.getNameLike());
+			if(filter.getNameContains() != null) {
+				parameters.add("nameContains", filter.getNameContains());
 			}
 		}
 		SmtBrandsPagedResponse response = doPost(BRANDS_PATH, SmtBrandsPagedResponse.class, parameters);
@@ -162,11 +163,16 @@ public class SmtCollectorClient {
 					parameters.add("gtins", gtin.toString());
 				}
 			}
-			if(filter.getGtinLike() != null) {
-				parameters.add("gtinLike", filter.getGtinLike());
+			if(filter.getGtinPrefixes() != null) {
+				for(SmtVariantGtinPrefix gtinPrefix : filter.getGtinPrefixes()) {
+					parameters.add("gtinPrefixes", gtinPrefix.toString());
+				}
 			}
-			if(filter.getLastModifiedDateGreaterThanOrEqualTo() != null) {
-				parameters.add("lastModifiedDateGreaterThanOrEqualTo", DateFormatUtils.format(filter.getLastModifiedDateGreaterThanOrEqualTo(), DATE_FORMAT));
+			if(filter.getGtinStartsWith() != null) {
+				parameters.add("gtinStartsWith", filter.getGtinStartsWith());
+			}
+			if(filter.getGtinContains() != null) {
+				parameters.add("gtinContains", filter.getGtinContains());
 			}
 			if(filter.getProductCode() != null) {
 				parameters.add("productCode", filter.getProductCode());
@@ -176,20 +182,35 @@ public class SmtCollectorClient {
 					parameters.add("productCodes", productCode.toString());
 				}
 			}
-			if(filter.getProductCodeLike() != null) {
-				parameters.add("productCodeLike", filter.getProductCodeLike());
+			if(filter.getProductCodeStartsWith() != null) {
+				parameters.add("productCodeStartsWith", filter.getProductCodeStartsWith());
 			}
-			if(filter.getProductTechnicalDescriptionLike() != null) {
-				parameters.add("productTechnicalDescriptionLike", filter.getProductTechnicalDescriptionLike());
+			if(filter.getProductCodeContains() != null) {
+				parameters.add("productCodeContains", filter.getProductCodeContains());
 			}
-			if(filter.getProductCompactDescriptionLike() != null) {
-				parameters.add("productCompactDescriptionLike", filter.getProductCompactDescriptionLike());
+			if(filter.getProductTechnicalDescriptionStartsWith() != null) {
+				parameters.add("productTechnicalDescriptionStartsWith", filter.getProductTechnicalDescriptionStartsWith());
+			}
+			if(filter.getProductTechnicalDescriptionContains() != null) {
+				parameters.add("productTechnicalDescriptionContains", filter.getProductTechnicalDescriptionContains());
+			}
+			if(filter.getProductCompactDescriptionStartsWith() != null) {
+				parameters.add("productCompactDescriptionStartsWith", filter.getProductCompactDescriptionStartsWith());
+			}
+			if(filter.getProductCompactDescriptionContains() != null) {
+				parameters.add("productCompactDescriptionContains", filter.getProductCompactDescriptionContains());
 			}
 			if(filter.getProductClickAndCollect() != null) {
 				parameters.add("productClickAndCollect", filter.getProductClickAndCollect().toString());
 			}
-			if(filter.getDescriptionLike() != null) {
-				parameters.add("descriptionLike", filter.getDescriptionLike());
+			if(filter.getWeb() != null) {
+				parameters.add("web", filter.getWeb().toString());
+			}
+			if(filter.getDescriptionStartsWith() != null) {
+				parameters.add("descriptionStartsWith", filter.getDescriptionStartsWith());
+			}
+			if(filter.getDescriptionContains() != null) {
+				parameters.add("descriptionContains", filter.getDescriptionContains());
 			}
 			if(filter.getSubfamilyGroupCodes() != null) {
 				for(SmtGroupCode code : filter.getSubfamilyGroupCodes()) {
@@ -226,11 +247,14 @@ public class SmtCollectorClient {
 					parameters.add("brandCodes", code.toString());
 				}
 			}
-			if(filter.getLongTextBrandLike() != null) {
-				parameters.add("longTextBrandLike", filter.getLongTextBrandLike());
-			}
 			if(filter.getLongTextBrandStartsWith() != null) {
 				parameters.add("longTextBrandStartsWith", filter.getLongTextBrandStartsWith());
+			}
+			if(filter.getLongTextBrandContains() != null) {
+				parameters.add("longTextBrandContains", filter.getLongTextBrandContains());
+			}
+			if(filter.getLastModifiedDateGreaterThanOrEqualTo() != null) {
+				parameters.add("lastModifiedDateGreaterThanOrEqualTo", DateFormatUtils.format(filter.getLastModifiedDateGreaterThanOrEqualTo(), DATE_FORMAT));
 			}
 		}
 		SmtVariantsPagedResponse response = doPost(VARIANTS_PATH, SmtVariantsPagedResponse.class, parameters);

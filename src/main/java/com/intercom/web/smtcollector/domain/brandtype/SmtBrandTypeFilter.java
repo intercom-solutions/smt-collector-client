@@ -6,9 +6,9 @@ public class SmtBrandTypeFilter implements SmtFilter<SmtBrandType> {
 
 	private SmtBrandTypeCode code = null;
 	private String codeStartsWith = null;
-	private String codeLike = null;
+	private String codeContains = null;
 	private String nameStartsWith = null;
-	private String nameLike = null;
+	private String nameContains = null;
 
 	public SmtBrandTypeFilter() {
 	}
@@ -29,12 +29,12 @@ public class SmtBrandTypeFilter implements SmtFilter<SmtBrandType> {
 		this.codeStartsWith = codeStartsWith;
 	}
 
-	public String getCodeLike() {
-		return codeLike;
+	public String getCodeContains() {
+		return codeContains;
 	}
 
-	public void setCodeLike(String codeLike) {
-		this.codeLike = codeLike;
+	public void setCodeContains(String codeContains) {
+		this.codeContains = codeContains;
 	}
 
 	public String getNameStartsWith() {
@@ -45,12 +45,12 @@ public class SmtBrandTypeFilter implements SmtFilter<SmtBrandType> {
 		this.nameStartsWith = nameStartsWith;
 	}
 
-	public String getNameLike() {
-		return nameLike;
+	public String getNameContains() {
+		return nameContains;
 	}
 
-	public void setNameLike(String nameLike) {
-		this.nameLike = nameLike;
+	public void setNameContains(String nameContains) {
+		this.nameContains = nameContains;
 	}
 
 }

@@ -4,37 +4,62 @@ import com.intercom.web.smtcollector.domain.SmtFilter;
 
 public class SmtProductFilter implements SmtFilter<SmtProduct> {
 
-	private String codeLike;
-	private String technicalDescriptionLike;
-	private String compactDescriptionLike;
+	private String codeStartsWith = null;
+	private String codeContains = null;
+	private String technicalDescriptionStartsWith = null;
+	private String technicalDescriptionContains = null;
+	private String compactDescriptionStartsWith = null;
+	private String compactDescriptionContains = null;
 
 	public SmtProductFilter() {
-		this.codeLike = null;
-		this.technicalDescriptionLike = null;
 	}
 
-	public String getCodeLike() {
-		return codeLike;
+	public String getCodeStartsWith() {
+		return codeStartsWith;
 	}
 
-	public void setCodeLike(String codeLike) {
-		this.codeLike = codeLike;
+	public void setCodeStartsWith(String codeStartsWith) {
+		this.codeStartsWith = codeStartsWith;
 	}
 
-	public String getTechnicalDescriptionLike() {
-		return technicalDescriptionLike;
+	public String getCodeContains() {
+		return codeContains;
 	}
 
-	public void setTechnicalDescriptionLike(String technicalDescriptionLike) {
-		this.technicalDescriptionLike = technicalDescriptionLike;
+	public void setCodeContains(String codeContains) {
+		this.codeContains = codeContains;
 	}
 
-	public String getCompactDescriptionLike() {
-		return compactDescriptionLike;
+	public String getTechnicalDescriptionStartsWith() {
+		return technicalDescriptionStartsWith;
 	}
 
-	public void setCompactDescriptionLike(String compactDescriptionLike) {
-		this.compactDescriptionLike = compactDescriptionLike;
+	public void setTechnicalDescriptionStartsWith(String technicalDescriptionStartsWith) {
+		this.technicalDescriptionStartsWith = technicalDescriptionStartsWith;
+	}
+
+	public String getTechnicalDescriptionContains() {
+		return technicalDescriptionContains;
+	}
+
+	public void setTechnicalDescriptionContains(String technicalDescriptionContains) {
+		this.technicalDescriptionContains = technicalDescriptionContains;
+	}
+
+	public String getCompactDescriptionStartsWith() {
+		return compactDescriptionStartsWith;
+	}
+
+	public void setCompactDescriptionStartsWith(String compactDescriptionStartsWith) {
+		this.compactDescriptionStartsWith = compactDescriptionStartsWith;
+	}
+
+	public String getCompactDescriptionContains() {
+		return compactDescriptionContains;
+	}
+
+	public void setCompactDescriptionContains(String compactDescriptionContains) {
+		this.compactDescriptionContains = compactDescriptionContains;
 	}
 
 }

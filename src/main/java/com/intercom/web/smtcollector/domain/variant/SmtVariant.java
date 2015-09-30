@@ -135,6 +135,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @JsonPropertyOrder({
 	"gtin",
 	"product",
+	"web",
 	"description",
 	"thirdPartyLogos",
 	"lifestyles",
@@ -253,6 +254,7 @@ public class SmtVariant extends SmtAuditableEntity<SmtVariant> {
 
 	private SmtVariantGtin gtin;
 	private SmtProduct product;
+	private boolean web = false;
 	private String description;
 	private final List<SmtVariantStatement> statements = new ArrayList<SmtVariantStatement>();
 	private final List<SmtVariantNameLookup> nameLookups = new ArrayList<SmtVariantNameLookup>();
@@ -303,6 +305,14 @@ public class SmtVariant extends SmtAuditableEntity<SmtVariant> {
 
 	public void setProduct(SmtProduct product) {
 		this.product = product;
+	}
+
+	public boolean isWeb() {
+		return web;
+	}
+
+	public void setWeb(boolean web) {
+		this.web = web;
 	}
 
 	public String getDescription() {
