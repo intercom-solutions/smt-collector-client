@@ -36,33 +36,33 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SmtCollectorClientTest {
-	
+
 	private SmtCollectorClient client;
 	private static final String URL = "http://smtcollector.interlaced.it/api";
-	private static final String USERNAME = "a.maffei";
-	private static final String PASSWORD = "int166";
+	private static final String USERNAME = "USERNAME";
+	private static final String PASSWORD = "PASSWORD";
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	public SmtCollectorClientTest() {
 	}
-	
+
 	@BeforeClass
 	public static void setUpClass() {
 	}
-	
+
 	@AfterClass
 	public static void tearDownClass() {
 	}
-	
+
 	@Before
 	public void setUp() {
 		client = new SmtCollectorClient(URL, USERNAME, PASSWORD);
 	}
-	
+
 	@After
 	public void tearDown() {
 	}
-	
+
 	@Test
 	public void testGetGroups() throws SmtDetailedErrorResponse {
 		SmtPageable pageable = new SmtPageable(0, 50, "name,desc");
@@ -80,7 +80,7 @@ public class SmtCollectorClientTest {
 		SmtPage page = groupsPagedResponse.getPage();
 		logger.info("size: " + page.getSize() + ", totalElements: " + page.getTotalElements() + ", totalPages: " + page.getTotalPages() + ", number: " + page.getNumber());
 	}
-	
+
 	@Test
 	public void testGetBrandTypes() throws SmtDetailedErrorResponse {
 		SmtPageable pageable = new SmtPageable(0, 50, "name,desc");
@@ -98,7 +98,7 @@ public class SmtCollectorClientTest {
 		SmtPage page = brandTypesPagedResponse.getPage();
 		logger.info("size: " + page.getSize() + ", totalElements: " + page.getTotalElements() + ", totalPages: " + page.getTotalPages() + ", number: " + page.getNumber());
 	}
-	
+
 	@Test
 	public void testGetBrands() throws SmtDetailedErrorResponse {
 		SmtPageable pageable = new SmtPageable(0, 50, "name,desc");
@@ -115,16 +115,16 @@ public class SmtCollectorClientTest {
 		SmtPage page = brandsPagedResponse.getPage();
 		logger.info("size: " + page.getSize() + ", totalElements: " + page.getTotalElements() + ", totalPages: " + page.getTotalPages() + ", number: " + page.getNumber());
 	}
-	
+
 	@Test
 	public void testGetVariants() throws SmtDetailedErrorResponse {
 		SmtPageable pageable = new SmtPageable();
 		SmtVariantFilter filter = new SmtVariantFilter();
 		Set<SmtVariantGtin> gtins = new LinkedHashSet<SmtVariantGtin>();
 		gtins.add(SmtVariantGtin.valueOf("0000080242796"));
-		//filter.setGtins(gtins);
+		filter.setGtins(gtins);
 		filter.setWeb(true);
-		//filter.setLastModifiedDateGreaterThanOrEqualTo(DateUtils.addDays(DateUtils.truncate(new Date(), Calendar.DATE), -7));
+		filter.setLastModifiedDateGreaterThanOrEqualTo(DateUtils.addDays(DateUtils.truncate(new Date(), Calendar.DATE), -7));
 		SmtVariantsPagedResponse variantsPagedResponse = client.getVariants(pageable, filter);
 		for(Map.Entry<String, SmtLink> linkEntry : variantsPagedResponse.getLinks().entrySet()) {
 			String key = linkEntry.getKey();
@@ -151,5 +151,5 @@ public class SmtCollectorClientTest {
 		SmtPage page = variantsPagedResponse.getPage();
 		logger.info("size: " + page.getSize() + ", totalElements: " + page.getTotalElements() + ", totalPages: " + page.getTotalPages() + ", number: " + page.getNumber());
 	}
-	
+
 }
