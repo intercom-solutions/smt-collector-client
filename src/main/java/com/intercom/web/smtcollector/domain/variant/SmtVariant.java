@@ -125,6 +125,7 @@ import com.intercom.web.smtcollector.domain.variant.statement.SmtVariantStatemen
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -317,6 +318,16 @@ public class SmtVariant extends SmtAuditableEntity<SmtVariant> {
 
 	public String getDescription() {
 		return description;
+	}
+
+	@JsonIgnore
+	public String getUpperCaseDescription() {
+		return StringUtils.upperCase(description);
+	}
+
+	@JsonIgnore
+	public String getCapitalizedDescription() {
+		return StringUtils.capitalize(description);
 	}
 
 	public void setDescription(String description) {

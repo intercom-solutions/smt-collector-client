@@ -10,6 +10,7 @@ public class SmtProductFilter implements SmtFilter<SmtProduct> {
 	private String technicalDescriptionContains = null;
 	private String compactDescriptionStartsWith = null;
 	private String compactDescriptionContains = null;
+	private Boolean clickAndCollect = null;
 
 	public SmtProductFilter() {
 	}
@@ -60,6 +61,14 @@ public class SmtProductFilter implements SmtFilter<SmtProduct> {
 
 	public void setCompactDescriptionContains(String compactDescriptionContains) {
 		this.compactDescriptionContains = compactDescriptionContains;
+	}
+
+	public Boolean getClickAndCollect() {
+		return clickAndCollect;
+	}
+
+	public void setClickAndCollect(Boolean clickAndCollect) {
+		this.clickAndCollect = clickAndCollect;
 	}
 
 }

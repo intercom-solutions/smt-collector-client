@@ -1,11 +1,13 @@
 package com.intercom.web.smtcollector.domain.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.intercom.web.smtcollector.domain.SmtAuditableEntity;
 import com.intercom.web.smtcollector.domain.brand.SmtBrand;
 import com.intercom.web.smtcollector.domain.group.SmtGroup;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -79,6 +81,16 @@ public class SmtProduct extends SmtAuditableEntity<SmtProduct> {
 		return technicalDescription;
 	}
 
+	@JsonIgnore
+	public String getUpperCaseTechnicalDescription() {
+		return StringUtils.upperCase(technicalDescription);
+	}
+
+	@JsonIgnore
+	public String getCapitalizedTechnicalDescription() {
+		return StringUtils.capitalize(technicalDescription);
+	}
+
 	public void setTechnicalDescription(String technicalDescription) {
 		this.technicalDescription = technicalDescription;
 	}
@@ -86,6 +98,16 @@ public class SmtProduct extends SmtAuditableEntity<SmtProduct> {
 	@JsonProperty(value = "compactDescription")
 	public String getCompactDescription() {
 		return compactDescription;
+	}
+
+	@JsonIgnore
+	public String getUpperCaseCompactDescription() {
+		return StringUtils.upperCase(compactDescription);
+	}
+
+	@JsonIgnore
+	public String getCapitalizedCompactDescription() {
+		return StringUtils.capitalize(compactDescription);
 	}
 
 	public void setCompactDescription(String compactDescription) {

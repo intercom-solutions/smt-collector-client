@@ -121,10 +121,10 @@ public class SmtCollectorClientTest {
 		SmtPageable pageable = new SmtPageable();
 		SmtVariantFilter filter = new SmtVariantFilter();
 		Set<SmtVariantGtin> gtins = new LinkedHashSet<SmtVariantGtin>();
-		gtins.add(SmtVariantGtin.valueOf("0000080242796"));
+		gtins.add(SmtVariantGtin.valueOf("8002580254462"));
 		filter.setGtins(gtins);
 		filter.setWeb(true);
-		filter.setLastModifiedDateGreaterThanOrEqualTo(DateUtils.addDays(DateUtils.truncate(new Date(), Calendar.DATE), -7));
+		filter.setLastModifiedDateGreaterThanOrEqualTo(DateUtils.addDays(DateUtils.truncate(new Date(), Calendar.YEAR), -1));
 		SmtVariantsPagedResponse variantsPagedResponse = client.getVariants(pageable, filter);
 		for(Map.Entry<String, SmtLink> linkEntry : variantsPagedResponse.getLinks().entrySet()) {
 			String key = linkEntry.getKey();
@@ -133,7 +133,7 @@ public class SmtCollectorClientTest {
 		}
 		for(SmtVariant variant : variantsPagedResponse.getContent()) {
 			logger.info(variant.getGtin().toString() + ": " + variant.getDescription());
-			logger.info(variant.getProduct().getCode() + ": " + variant.getProduct().getCompactDescription());
+			logger.info(variant.getProduct().getCode() + ": " + variant.getProduct().getUpperCaseCompactDescription());
 			List<SmtVariantLongTextIngredient> ingredients = variant.getIngredients();
 			logger.info("Total ingredients: " + ingredients.size());
 			for(SmtVariantLongTextIngredient ingredient : ingredients) {
